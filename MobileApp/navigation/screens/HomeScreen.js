@@ -1,12 +1,24 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import {Avatar} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Card from '../../components/Card';
-import {apiKey, apiUrl, baseImage} from '../../config/api.config';
+import {
+  apiKey,
+  apiUrl,
+  apiTopMovies,
+  apiBaseImage,
+} from '../../config/api.config';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -14,7 +26,7 @@ const HomeScreen = () => {
     const getAllMovies = async () => {
       try {
         const response = await axios.get(
-          `${apiUrl}?api_key=${apiKey}&language=en-US&page=${page}`,
+          `${apiUrl}/${apiTopMovies}?api_key=${apiKey}&language=en-US&page=${page}`,
         );
         const moviesResponse = response.data;
         setMovies(moviesResponse.results);
@@ -58,43 +70,51 @@ const HomeScreen = () => {
         </View>
         {movies.map((movie, idx) => {
           return (
-            <Card key={idx} onPress={() => navigation.push('Details')}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
+            <TouchableOpacity
+              key={idx}
+              onPress={() =>
+                navigation.navigate('Detail', {
+                  movieId: movie.id,
+                })
+              }>
+              <Card>
                 <View
                   style={{
-                    flexDirection: 'column',
+                    flexDirection: 'row',
                     alignItems: 'center',
                   }}>
-                  <Avatar.Image
-                    size={110}
-                    source={{
-                      uri: `${baseImage}/${movie.backdrop_path}`,
-                    }}
-                  />
-                  <Text style={[styles.Title, {paddingTop: 8}]}>
-                    {movie.vote_average}/10
-                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                    }}>
+                    <Avatar.Image
+                      size={110}
+                      source={{
+                        uri: `${apiBaseImage}/${movie.backdrop_path}`,
+                      }}
+                    />
+                    <Text style={[styles.Title, {paddingTop: 8}]}>
+                      {movie.vote_average}/10
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'column',
+                      marginLeft: 18,
+                      flex: 1,
+                    }}>
+                    <Text style={styles.Title}>{movie.title}</Text>
+                    <Text
+                      numberOfLines={6}
+                      ellipsizeMode="tail"
+                      style={styles.Description}>
+                      {movie.overview}
+                    </Text>
+                  </View>
                 </View>
-                <View
-                  style={{
-                    flexDirection: 'column',
-                    marginLeft: 18,
-                    flex: 1,
-                  }}>
-                  <Text style={styles.Title}>{movie.title}</Text>
-                  <Text
-                    numberOfLines={6}
-                    ellipsizeMode="tail"
-                    style={styles.Description}>
-                    {movie.overview}
-                  </Text>
-                </View>
-              </View>
-            </Card>
+              </Card>
+            </TouchableOpacity>
           );
         })}
       </View>

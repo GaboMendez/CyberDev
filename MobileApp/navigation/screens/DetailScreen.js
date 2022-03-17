@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useState, useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   Colors,
@@ -6,9 +7,28 @@ import {
   Header,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {apiKey, apiUrl} from '../../config/api.config';
 import Section from './../../components/Section';
 
-const DetailScreen = () => {
+const DetailScreen = ({route, navigation}) => {
+  const {movieId} = route.params;
+  const [movie, setMovie] = useState({});
+
+  useEffect(() => {
+    const getMovieById = async movieId => {
+      try {
+        const response = await axios.get(
+          `${apiUrl}/${movieId}?api_key=${apiKey}&language=en-US`,
+        );
+        setMovie(response.data);
+      } catch (error) {
+        // handle error
+        alert(error.message);
+      }
+    };
+    getMovieById(movieId);
+  }, [movieId]);
+
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Header />
