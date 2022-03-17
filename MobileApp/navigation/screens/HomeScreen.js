@@ -2,21 +2,19 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Avatar} from 'react-native-paper';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Card from '../../components/Card';
-
-const apiUrl = 'https://api.themoviedb.org/3/movie/top_rated';
-const apiKey = 'bf091621962bdf5c30339e874a2a0c1a';
-const baseImage = 'https://image.tmdb.org/t/p/w500';
+import {apiKey, apiUrl, baseImage} from '../../config/api.config';
 
 const HomeScreen = () => {
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const getAllMovies = async () => {
       try {
         const response = await axios.get(
-          `${apiUrl}?api_key=${apiKey}&language=en-US&page=1`,
+          `${apiUrl}?api_key=${apiKey}&language=en-US&page=${page}`,
         );
         const moviesResponse = response.data;
         setMovies(moviesResponse.results);
@@ -26,7 +24,7 @@ const HomeScreen = () => {
       }
     };
     getAllMovies();
-  }, []);
+  }, [page]);
 
   if (!movies) return null;
 
@@ -34,26 +32,57 @@ const HomeScreen = () => {
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View
         style={{
+          flexDirection: 'column',
           margin: 10,
         }}>
-        {movies?.map((movie, idx) => {
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingBottom: 10,
+          }}>
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            onPress={() => page > 1 && setPage(page - 1)}
+            style={{marginTop: 8, marginRight: 8}}
+          />
+          <Text style={[styles.Title, {paddingTop: 8}]}>{page}</Text>
+          <Ionicons
+            name="arrow-forward"
+            size={24}
+            onPress={() => setPage(page + 1)}
+            style={{marginTop: 8, marginLeft: 8}}
+          />
+        </View>
+        {movies.map((movie, idx) => {
           return (
-            <Card key={idx}>
+            <Card key={idx} onPress={() => navigation.push('Details')}>
               <View
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                 }}>
-                <Avatar.Image
-                  size={100}
-                  source={{
-                    uri: `${baseImage}/${movie.backdrop_path}`,
-                  }}
-                />
                 <View
                   style={{
                     flexDirection: 'column',
-                    marginLeft: 10,
+                    alignItems: 'center',
+                  }}>
+                  <Avatar.Image
+                    size={110}
+                    source={{
+                      uri: `${baseImage}/${movie.backdrop_path}`,
+                    }}
+                  />
+                  <Text style={[styles.Title, {paddingTop: 8}]}>
+                    {movie.vote_average}/10
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'column',
+                    marginLeft: 18,
                     flex: 1,
                   }}>
                   <Text style={styles.Title}>{movie.title}</Text>
