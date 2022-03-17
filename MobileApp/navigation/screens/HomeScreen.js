@@ -23,7 +23,7 @@ const HomeScreen = ({navigation}) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const getAllMovies = async () => {
+    const getAllMovies = async page => {
       try {
         const response = await axios.get(
           `${apiUrl}/${apiTopMovies}?api_key=${apiKey}&language=en-US&page=${page}`,
@@ -35,10 +35,10 @@ const HomeScreen = ({navigation}) => {
         alert(error.message);
       }
     };
-    getAllMovies();
+    getAllMovies(page);
   }, [page]);
 
-  if (!movies) return null;
+  if (movies.length === 0) return null;
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">

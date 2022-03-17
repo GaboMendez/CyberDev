@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, Image} from 'react-native';
 import {
   Colors,
   DebugInstructions,
   Header,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {apiKey, apiUrl} from '../../config/api.config';
+import {apiBaseImage, apiKey, apiUrl} from '../../config/api.config';
 import Section from './../../components/Section';
 
 const DetailScreen = ({route, navigation}) => {
@@ -29,9 +29,14 @@ const DetailScreen = ({route, navigation}) => {
     getMovieById(movieId);
   }, [movieId]);
 
+  if (Object.keys(movie).length === 0) return null;
+
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
-      <Header />
+      <Image
+        style={styles.image}
+        source={{uri: `${apiBaseImage}/${movie.backdrop_path}`}}
+      />
       <View
         style={{
           backgroundColor: Colors.white,
@@ -55,6 +60,11 @@ const DetailScreen = ({route, navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  image: {
+    resizeMode: 'cover',
+    flex: 1,
+    aspectRatio: 2,
+  },
   highlight: {
     fontWeight: '700',
   },
