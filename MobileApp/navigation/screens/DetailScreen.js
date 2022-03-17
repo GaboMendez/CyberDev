@@ -1,12 +1,8 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, View, Image} from 'react-native';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import React, {useEffect, useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {apiBaseImage, apiKey, apiUrl} from '../../config/api.config';
 import Section from './../../components/Section';
 
@@ -29,31 +25,46 @@ const DetailScreen = ({route, navigation}) => {
     getMovieById(movieId);
   }, [movieId]);
 
+  const handleFavorite = () => {
+    console.log('press favv');
+  };
+
   if (Object.keys(movie).length === 0) return null;
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Image
         style={styles.image}
-        source={{uri: `${apiBaseImage}/${movie.backdrop_path}`}}
+        source={{uri: `${apiBaseImage}/${movie.poster_path}`}}
       />
       <View
         style={{
           backgroundColor: Colors.white,
+          paddingBottom: 12,
         }}>
-        <Section title="Step One">
-          Edit <Text style={styles.highlight}>App.js</Text> to change this
-          screen and then come back to see your edits.
+        <Section title={movie.title} alignCenter>
+          <View
+            style={{
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}>
+            <Text style={[styles.highlight, {fontSize: 18, marginBottom: 12}]}>
+              {`${movie.vote_average}/10`}
+            </Text>
+            <Icon.Button
+              name="star"
+              backgroundColor="#ffbb2a"
+              onPress={handleFavorite}>
+              Add to favorites
+            </Icon.Button>
+          </View>
         </Section>
-        <Section title="See Your Changes">
-          <ReloadInstructions />
+        <Section title="Overview">
+          <Text numberOfLines={10} ellipsizeMode="tail">
+            {movie.overview}
+          </Text>
         </Section>
-        <Section title="Debug">
-          <DebugInstructions />
-        </Section>
-        <Section title="Learn More">
-          Read the docs to discover what to do next:
-        </Section>
+        <Section title="Release date">{movie.release_date}</Section>
       </View>
     </ScrollView>
   );
@@ -61,9 +72,10 @@ const DetailScreen = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   image: {
-    resizeMode: 'cover',
+    backgroundColor: Colors.white,
+    resizeMode: 'contain',
     flex: 1,
-    aspectRatio: 2,
+    aspectRatio: 1.1,
   },
   highlight: {
     fontWeight: '700',

@@ -1,21 +1,20 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {
+  Image,
   ScrollView,
   StyleSheet,
   Text,
-  View,
-  Button,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import {Avatar} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Card from '../../components/Card';
 import {
-  apiKey,
-  apiUrl,
-  apiTopMovies,
   apiBaseImage,
+  apiKey,
+  apiTopMovies,
+  apiUrl,
 } from '../../config/api.config';
 
 const HomeScreen = ({navigation}) => {
@@ -88,11 +87,10 @@ const HomeScreen = ({navigation}) => {
                       flexDirection: 'column',
                       alignItems: 'center',
                     }}>
-                    <Avatar.Image
-                      size={110}
-                      source={{
-                        uri: `${apiBaseImage}/${movie.backdrop_path}`,
-                      }}
+                    <Image
+                      style={styles.Image}
+                      source={{uri: `${apiBaseImage}/${movie.backdrop_path}`}}
+                      resizeMode={'cover'}
                     />
                     <Text style={[styles.Title, {paddingTop: 8}]}>
                       {movie.vote_average}/10
@@ -131,6 +129,13 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 18,
     fontWeight: '400',
+  },
+  Image: {
+    width: 110,
+    height: 110,
+    borderColor: 'gray',
+    borderWidth: 2,
+    borderRadius: 75,
   },
 });
 

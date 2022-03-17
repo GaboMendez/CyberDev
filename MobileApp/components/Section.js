@@ -3,10 +3,11 @@ import React from 'react';
 import {StyleSheet, Text, useColorScheme, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
+const Section = ({children, title, alignCenter}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
+    <View
+      style={[styles.sectionContainer, {alignItems: alignCenter && 'center'}]}>
       <Text
         style={[
           styles.sectionTitle,
@@ -31,17 +32,17 @@ const Section = ({children, title}): Node => {
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+    marginTop: 20,
+    paddingHorizontal: 16,
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: '500',
   },
 });
 
