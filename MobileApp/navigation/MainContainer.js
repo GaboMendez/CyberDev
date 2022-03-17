@@ -41,6 +41,8 @@ const MainContainer = () => {
             padding: 10,
             height: 70,
           },
+          headerTitle: `Gabriel Mendez ${new Date().toLocaleDateString()}`,
+          headerTitleAlign: 'center',
         })}>
         <Tab.Screen name={homeName} component={HomeScreen} />
         <Tab.Screen name={favoritesName} component={FavoriteScren} />
