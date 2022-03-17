@@ -1,15 +1,9 @@
 import type {Node} from 'react';
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
-import HomeScreen from './screens/HomeScreen';
+import MainContainer from './navigation/MainContainer';
 
 const App: () => Node = () => {
-  return (
-    <SafeAreaView>
-      <StatusBar barStyle={'light-content'} />
-      <HomeScreen />
-    </SafeAreaView>
-  );
+  return <MainContainer />;
 };
 
 export default App;
