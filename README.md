@@ -106,10 +106,10 @@ Otherwise you need to do:
 ##### App Screens
 
 <p aling="center">
-<img src="https://i.ibb.co/4TWqbx7/Home.png" width="30%" /> <img src="/ScreenShots/Screen02.jpg" width="30%" />
-<img src="https://i.ibb.co/dgQbhSV/Detail01.png" width="30%" /> <img src="/ScreenShots/Screen04.jpg" width="30%" />  
-<img src="https://i.ibb.co/MC1bmTG/Detail02.png" width="30%" /> <img src="/ScreenShots/Screen04.jpg" width="30%" />  
+<img src="https://i.ibb.co/4TWqbx7/Home.png" width="30%" />
+<img src="https://i.ibb.co/dgQbhSV/Detail01.png" width="30%" />
+<img src="https://i.ibb.co/MC1bmTG/Detail02.png" width="30%" /> 
 </p>
 <p aling="center">
-<img src="https://i.ibb.co/z43ZxrW/Favorites.png" width="30%" /> <img src="/ScreenShots/Screen04.jpg" width="30%" />  
+<img src="https://i.ibb.co/z43ZxrW/Favorites.png" width="30%" /> 
 </p>
