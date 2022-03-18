@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {apiBaseImage} from '../config/api.config';
 
-const MovieItem = ({movie}) => {
+const MovieItem = ({movie, favorite}) => {
   return (
     <View
       style={{
@@ -29,6 +30,14 @@ const MovieItem = ({movie}) => {
           marginLeft: 18,
           flex: 1,
         }}>
+        {favorite && (
+          <Ionicons
+            style={styles.Icon}
+            color="#ad1301"
+            name="heart"
+            size={28}
+          />
+        )}
         <Text style={styles.Title}>{movie.title}</Text>
         <Text numberOfLines={6} ellipsizeMode="tail" style={styles.Description}>
           {movie.overview}
@@ -54,6 +63,11 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 2,
     borderRadius: 75,
+  },
+  Icon: {
+    position: 'absolute',
+    right: 0,
+    top: 2,
   },
 });
 

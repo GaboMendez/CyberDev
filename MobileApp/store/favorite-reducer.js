@@ -8,7 +8,10 @@ const FavoriteReducer = (state, action) => {
         favorites: [...state.favorites, action.payload],
       };
     case DELETE_FAVORITE:
-      return {};
+      return {
+        ...state,
+        favorites: state.favorites.filter(movie => movie.id !== action.payload),
+      };
     default: {
       return state;
     }

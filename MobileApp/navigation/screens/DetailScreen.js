@@ -1,17 +1,21 @@
 import axios from 'axios';
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {apiBaseImage, apiKey, apiUrl} from '../../config/api.config';
-import Section from './../../components/Section';
 import FavoriteContext from '../../store/favorite-context';
+import Section from './../../components/Section';
 
 const DetailScreen = ({route, navigation}) => {
   const {movieId} = route.params;
+  const {favorites, addFavorite, deleteFavorite} = useContext(FavoriteContext);
   const [movie, setMovie] = useState({});
 
-  const {favorites, addFavorite, deleteFavorite} = useContext(FavoriteContext);
+  const foundFavorite = favorites.find(item => item.id === movieId);
+  const [favorite, setFavorite] = useState(!!foundFavorite);
+
+  console.log('favorites', favorites);
 
   useEffect(() => {
     const getMovieById = async movieId => {
@@ -29,16 +33,19 @@ const DetailScreen = ({route, navigation}) => {
   }, [movieId]);
 
   const handleFavorite = () => {
-    // {id, img, title, overview, rating}
-    console.log('press favv');
-    const favMovie = {
-      id: movie.id,
-      title: movie.title,
-      img: movie.backdrop_path,
-      overview: movie.overview,
-      rating: movie.vote_average,
-    };
-    addFavorite(favMovie);
+    if (favorite) {
+      deleteFavorite(movieId);
+    } else {
+      const favMovie = {
+        id: movie.id,
+        title: movie.title,
+        backdrop_path: movie.backdrop_path,
+        overview: movie.overview,
+        vote_average: movie.vote_average,
+      };
+      addFavorite(favMovie);
+    }
+    setFavorite(!favorite);
   };
 
   if (Object.keys(movie).length === 0) return null;
@@ -64,10 +71,10 @@ const DetailScreen = ({route, navigation}) => {
               {`${movie.vote_average}/10`}
             </Text>
             <Icon.Button
-              name="star"
-              backgroundColor="#ffbb2a"
+              name={favorite ? 'heart-dislike-sharp' : 'heart-sharp'}
+              backgroundColor={favorite ? '#ad1301' : '#ffbb2a'}
               onPress={handleFavorite}>
-              Add to favorites
+              {favorite ? 'Remove from favorites' : 'Add to favorites'}
             </Icon.Button>
           </View>
         </Section>

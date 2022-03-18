@@ -15,8 +15,8 @@ const FavoriteState = ({children}) => {
     dispatch({type: ADD_FAVORITE, payload: favorite});
   };
   // Remove Favorite
-  const deleteFavorite = favorite => {
-    dispatch({type: DELETE_FAVORITE, payload: favorite});
+  const deleteFavorite = id => {
+    dispatch({type: DELETE_FAVORITE, payload: id});
   };
 
   return (
