@@ -20,7 +20,7 @@ const MovieItem = ({movie, favorite}) => {
           source={{uri: `${apiBaseImage}/${movie.backdrop_path}`}}
           resizeMode={'cover'}
         />
-        <Text style={[styles.Title, {paddingTop: 8}]}>
+        <Text style={[styles.Title, {paddingTop: 8, marginLeft: 24}]}>
           {movie.vote_average}/10
         </Text>
       </View>
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   Title: {
     fontSize: 24,
     fontWeight: '600',
+    marginRight: 30,
   },
   Description: {
     marginTop: 8,
