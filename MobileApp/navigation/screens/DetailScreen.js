@@ -1,14 +1,17 @@
 import axios from 'axios';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {apiBaseImage, apiKey, apiUrl} from '../../config/api.config';
 import Section from './../../components/Section';
+import FavoriteContext from '../../store/favorite-context';
 
 const DetailScreen = ({route, navigation}) => {
   const {movieId} = route.params;
   const [movie, setMovie] = useState({});
+
+  const {favorites, addFavorite, deleteFavorite} = useContext(FavoriteContext);
 
   useEffect(() => {
     const getMovieById = async movieId => {
@@ -26,7 +29,16 @@ const DetailScreen = ({route, navigation}) => {
   }, [movieId]);
 
   const handleFavorite = () => {
+    // {id, img, title, overview, rating}
     console.log('press favv');
+    const favMovie = {
+      id: movie.id,
+      title: movie.title,
+      img: movie.backdrop_path,
+      overview: movie.overview,
+      rating: movie.vote_average,
+    };
+    addFavorite(favMovie);
   };
 
   if (Object.keys(movie).length === 0) return null;

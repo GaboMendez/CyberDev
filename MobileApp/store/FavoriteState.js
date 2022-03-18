@@ -1,0 +1,34 @@
+import React, {useReducer} from 'react';
+import {ADD_FAVORITE, DELETE_FAVORITE} from './favorite-actions';
+import FavoriteContext from './favorite-context';
+import FavoriteReducer from './favorite-reducer';
+
+const FavoriteState = ({children}) => {
+  const initialState = {
+    favorites: [], // {id, img, title, overview, rating}
+  };
+
+  const [state, dispatch] = useReducer(FavoriteReducer, initialState);
+
+  // Add Favorite
+  const addFavorite = favorite => {
+    dispatch({type: ADD_FAVORITE, payload: favorite});
+  };
+  // Remove Favorite
+  const deleteFavorite = favorite => {
+    dispatch({type: DELETE_FAVORITE, payload: favorite});
+  };
+
+  return (
+    <FavoriteContext.Provider
+      value={{
+        favorites: state.favorites,
+        addFavorite,
+        deleteFavorite,
+      }}>
+      {children}
+    </FavoriteContext.Provider>
+  );
+};
+
+export default FavoriteState;
