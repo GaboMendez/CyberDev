@@ -5,7 +5,7 @@ import FavoriteReducer from './favorite-reducer';
 
 const FavoriteState = ({children}) => {
   const initialState = {
-    favorites: [], // {id, img, title, overview, rating}
+    favorites: [],
   };
 
   const [state, dispatch] = useReducer(FavoriteReducer, initialState);
@@ -14,7 +14,7 @@ const FavoriteState = ({children}) => {
   const addFavorite = favorite => {
     dispatch({type: ADD_FAVORITE, payload: favorite});
   };
-  // Remove Favorite
+  // Delete Favorite
   const deleteFavorite = id => {
     dispatch({type: DELETE_FAVORITE, payload: id});
   };

@@ -15,8 +15,6 @@ const DetailScreen = ({route, navigation}) => {
   const foundFavorite = favorites.find(item => item.id === movieId);
   const [favorite, setFavorite] = useState(!!foundFavorite);
 
-  console.log('favorites', favorites);
-
   useEffect(() => {
     const getMovieById = async movieId => {
       try {
