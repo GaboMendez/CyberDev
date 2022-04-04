@@ -1,7 +1,6 @@
 import type {Node} from 'react';
 import React from 'react';
-import {StyleSheet, Text, useColorScheme, View} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {StyleSheet, Text, View} from 'react-native';
 
 const Section = ({children, title, alignCenter}): Node => {
   return (
