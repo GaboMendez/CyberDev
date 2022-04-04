@@ -53,6 +53,7 @@ const HomeScreen = ({navigation}) => {
             size={24}
             onPress={() => page > 1 && setPage(page - 1)}
             style={{marginTop: 8, marginRight: 8}}
+            color="#808080"
           />
           <Text style={[styles.Title, {paddingTop: 8}]}>{page}</Text>
           <Ionicons
@@ -60,6 +61,7 @@ const HomeScreen = ({navigation}) => {
             size={24}
             onPress={() => setPage(page + 1)}
             style={{marginTop: 8, marginLeft: 8}}
+            color="#808080"
           />
         </View>
         {movies.map((movie, idx) => {
@@ -86,6 +88,7 @@ const styles = StyleSheet.create({
   Title: {
     fontSize: 24,
     fontWeight: '600',
+    color: '#000',
   },
 });
 

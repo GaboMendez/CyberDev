@@ -52,11 +52,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     marginRight: 30,
+    color: '#000',
   },
   Description: {
     marginTop: 8,
     fontSize: 18,
     fontWeight: '400',
+    color: '#808080',
   },
   Image: {
     width: 110,
