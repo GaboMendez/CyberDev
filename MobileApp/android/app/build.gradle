@@ -153,10 +153,10 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('your_key_name.keystore')
-            storePassword 'your_key_store_password'
-            keyAlias 'your_key_alias'
-            keyPassword 'your_key_file_alias_password'
+            storeFile file('gabomndz.keystore')
+            storePassword 'gabriel123'
+            keyAlias 'gabomndz'
+            keyPassword 'gabriel123'
         }
     }
     buildTypes {
