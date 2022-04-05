@@ -18,8 +18,8 @@ Development test
       - [ATM Emulator](#atm-emulator)
       - [Coincidences](#coincidences)
     - [Run MobileApp](#run-mobileapp)
-      - [Movie App](#movie-app)
-        - [Run APK in Android Device](#run-apk-in-android-device)
+      - [Run Movie App in your local environment](#run-movie-app-in-your-local-environment)
+      - [Run APK in Android Device](#run-apk-in-android-device)
         - [App Screens](#app-screens)
 
 ## Requirements
@@ -101,18 +101,18 @@ Otherwise you need to do:
 
      $ cd MobileApp
 
-#### Movie App
+#### Run Movie App in your local environment
 
      $ yarn install
      $ yarn android
 
-##### Run APK in Android Device
+#### Run APK in Android Device
 
 If you are in the project root directory you only need to do:
 
      $ cd ReleaseAndroid
 
-Take the .apk file to android device for installing it, and that's it you have the `MovieApp` in your phone.
+Take the `.apk` file to android device for installing it, and that's it you have the `MovieApp` in your phone.
 
 ##### App Screens
 
