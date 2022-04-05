@@ -102,6 +102,14 @@ Otherwise you need to do:
 
      $ yarn install
      $ yarn android
+     
+##### Run APK in Android Device
+
+If you are in the project root directory you only need to do:
+
+     $ cd ReleaseAndroid
+     
+Take the .apk file to android device for installing it, and that's it you have the `MovieApp` in your phone.
 
 ##### App Screens
 
